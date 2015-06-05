@@ -1,6 +1,4 @@
 
-image = rgb2gray(imread('tempE.png'));
- 
-recognize(image)
-%TemplateMatching(image,template,0.5)
-   %image = niblack(test)
+image = imresize( rgb2gray(imread('tempA.png')), [50 50] );
+template = imresize( rgb2gray(imread('tempL.png')), [50 50] );
+TemplateMatching(image,template)

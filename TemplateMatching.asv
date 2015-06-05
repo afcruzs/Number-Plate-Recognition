@@ -3,11 +3,10 @@ function y = TemplateMatching(image,template)
     %nc = normalized_correlation(image, template);
    % max(nc(:))
     %y = max(nc(:)) >= threshold;
-    sz = size(image);
-    t1 = sz(1); t2 = sz(2);
-    sum1 = t1 * t2 * 21 * 21
-    %sum1 = 1;
-    C = sum(sum( ~xor(image , template) )) / (t1*t2)
+    size(image)
+    size(template)
+    sum1 = 100^2 * 20 * 20;
+    C = sum(sum( image & template ) / sum1
     M = movingTemplate(image,template) / sum1
     N = movingTemplate(template,image) / sum1
     
