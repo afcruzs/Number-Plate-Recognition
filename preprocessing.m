@@ -1,6 +1,6 @@
-function I = preprocessing(img)
+function I = preprocessing(img, row, col)
     
-    I = imresize(img,[400 NaN]);% Resizing the image keeping aspect ratio same.
+    I = imresize(img,[row col]);% Resizing the image keeping aspect ratio same.
     I = rgb2gray(I); %Lo pasa a blanco y negro
     
     %Esto funciona para cuando el color de las letras de las placas NO
