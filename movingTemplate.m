@@ -1,10 +1,10 @@
-function M = movingTemplate(image,template)
+function M = movingTemplate(image,template, t)
     M  = 0;
     sz = size(image);
     h = sz(1);
     w = sz(2);
-    dxx = 3;
-    dyy = 3;
+    dxx = t;
+    dyy = t;
     for dx = -dxx:1:dxx;
         for dy = -dyy:dyy;
             for i=1:h;
