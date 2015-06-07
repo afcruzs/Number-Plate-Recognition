@@ -1,4 +1,4 @@
-img = imread('CAN-732.jpg');
+img = imread('jeje.png');
 img = preprocessing(img);
 
 %Division por regiones:
@@ -8,9 +8,9 @@ sz = size(img);
 h = sz(1);
 w = sz(2);
 areabig = h*w;
-
-
-for i = 1 : length(st)
+plate = '';
+figure, imshow(img); hold on;
+for i = 1 : length(st);
        
       thisBB = st(i).BoundingBox;
       
@@ -28,8 +28,10 @@ for i = 1 : length(st)
       % se supone que siemrpe esta el rectangulo de la placa recubriendo...
       
       
-      %figure, imshow(potentialPlate); hold on;
+      
+      recog = zeros(1,length(charBounds));
       i
+      numbers = 0;
       for k = 1 : length(charBounds);
             
           charBB = charBounds(k).BoundingBox;
@@ -37,18 +39,28 @@ for i = 1 : length(st)
           sz = size(char); h2 = sz(1); w2 = sz(2);
           if (h2*w2)/(h*w) > 0.1274666; continue; end
           if w2 > h2; continue; end
-          %rectangle('Position', [charBB(1),charBB(2),charBB(3),charBB(4)],'EdgeColor','r','LineWidth',2 )
-          figure, imshow(char);
-          
-          
-          [flag,val] = recognize(char,'A':'Z');
-          [flag1,val1] = recognize(char,'0':'9');
-          
-          if flag ~= -1;              
-              disp(flag);
+          [flag,val] = recognize(char,horzcat('A':'Z','0':'9'));
+          if val >= 0.5; 
+              plate(end+1) = flag; 
+              recog(k) = 1; 
+              plate = strcat(plate,flag);
+              if '0' <= flag && flag <= '9';
+                  numbers = numbers + 1;
+              end
+              
           end
-          
-          
       end
-      
+    
+      if length(plate) >= 6 | numbers < 3; 
+          plate = '';
+      else
+          break;
+      end
 end
+
+if length(plate) == 0;
+    disp('No es una placa valida j3j3j3j3j3');
+else
+    disp(plate);
+end
+
