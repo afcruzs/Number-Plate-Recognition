@@ -1,16 +1,16 @@
 
-nameImage = 'num23.png';
+nameImage = 'num64.png';
 
 img = imread(nameImage);
-row = 50;
-col = 50;
+row = 60;
+col = 40;
 dx = 3;
 
 image = preprocessing(img,row,col);
 figure, imshow(image);
 
 
-letter = 'A';
+letter = '0';
 max = -1;
 
 for i='0':'9';
@@ -21,8 +21,10 @@ for i='0':'9';
     if (mx > max);
         max = mx;
         letter = i;
-        figure, imshow(template);
+        %figure, imshow(template);
     end
 end
+    disp('porcentaje de correlación :')
     disp(max);
-    disp(letter);
+    disp('caracter reconocido : ');
+    disp(letter)
