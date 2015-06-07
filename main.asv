@@ -1,4 +1,4 @@
-img = imread('fake.png');
+img = imread('CAN-732.jpg');
 img = preprocessing(img);
 
 %Division por regiones:
@@ -41,7 +41,8 @@ for i = 1 : length(st)
           figure, imshow(char);
           
           
-          [flag,val] = recognize(char,horzcat('A':'Z','0':'9'));
+          [flag,val] = recognize(char,'A':'Z');
+          [flag1,val1] = recognize(char,'0':'9');
           
           if flag ~= -1;              
               disp(flag);

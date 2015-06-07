@@ -1,5 +1,5 @@
 
-nameImage = 'num64.png';
+nameImage = '3.png';
 
 img = imread(nameImage);
 row = 60;
@@ -13,8 +13,8 @@ figure, imshow(image);
 letter = '0';
 max = -1;
 
-for i='0':'9';
-    name = strcat('num',i,'1.png');
+for i='A':'Z';
+    name = strcat('temp',i,'.png');
     template = imread(name);
     template = preprocessing(template,row,col);
     mx = TemplateMatching(image,template,dx); 

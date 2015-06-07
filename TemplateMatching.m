@@ -1,5 +1,4 @@
 function y = TemplateMatching(image,template, dx)
-    
     nc = normalized_correlation(image, template);
    % max(nc(:))
     %y = max(nc(:)) >= threshold;
