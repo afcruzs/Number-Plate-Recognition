@@ -8,19 +8,17 @@ col = 50;
 
 image = preprocessing(img,row,col);
 figure, imshow(image);
-
-
-letter = 'A';
 max = -1;
+letter = 'A';
+
 for i='A':'Z';
     name = strcat('temp',i,'.png');
-    template = imread(name);
-    template = preprocessing(template,row,col);
+    template = imresize( rgb2gray(imread(name)), [row col] );
     mx = TemplateMatching(image,template); 
     if (mx > max);
         max = mx;
         letter = i;
-        %figure, imshow(template);
+        figure, imshow(template);
     end
 end
     disp(max);
