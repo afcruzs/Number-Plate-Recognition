@@ -3,7 +3,8 @@ function I = preprocessing(img)
     I = imresize(img,[400 nan]);% Resizing the image keeping aspect ratio same.
     I = rgb2gray(I); %Lo pasa a blanco y negro
     
-    %Esto funciona para cuando el color de las letras de las placas NO
+    
+   %Esto funciona para cuando el color de las letras de las placas NO
     %Es negro, sin embargo genera ruido.
     %I = imsharpen(I,'Radius',2,'Amount',10); %Resalta los edges
     %I = medfilt2(I,[3 2]); %Limpia un poco de ruido
