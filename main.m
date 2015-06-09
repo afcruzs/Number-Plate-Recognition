@@ -1,5 +1,5 @@
 img = imread('Placa6.jpg');
-imshow(img);
+%imshow(img);
 tic;
 img = preprocessing(img);
 
@@ -11,6 +11,7 @@ h = sz(1);
 w = sz(2);
 areabig = h*w;
 plate = '';
+
 for i = 1 : length(st);
        
       thisBB = st(i).BoundingBox;
@@ -30,16 +31,19 @@ for i = 1 : length(st);
             
       plate = '';
       numbers = 0;
-      
+      figure, imshow(potentialPlate);
       for k = 1 : length(charBounds);
             
           charBB = charBounds(k).BoundingBox;
+          rectangle('Position', [charBB(1),charBB(2),charBB(3),charBB(4)],'EdgeColor','b','LineWidth',2 )
           char = imcrop(potentialPlate,charBB);
           h2 = charBB(3); w2 = charBB(4);
           ratio = (h2*w2)/(area);
           delta = abs(ratio-0.08);
           if delta > 0.05;  continue; end %Descarta las cosas pequenas que estorban
-         
+          
+          
+          rectangle('Position', [charBB(1),charBB(2),charBB(3),charBB(4)],'EdgeColor','r','LineWidth',2 )
           [flag,val] = recognize(char,horzcat('A':'Z','0':'9'));
           
           if val >= 0.6; 
