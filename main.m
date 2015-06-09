@@ -1,4 +1,6 @@
-img = imread('crf693.jpg');
+img = imread('Placa6.jpg');
+imshow(img);
+tic;
 img = preprocessing(img);
 
 %Division por regiones:
@@ -55,6 +57,7 @@ for i = 1 : length(st);
       end
 end
 
+toc
 if length(plate) ~= 6;
     disp('No es una placa valida j3j3j3j3j3');
 else
