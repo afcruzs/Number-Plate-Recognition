@@ -1,4 +1,4 @@
-img = imread('Placa18.jpg');
+img = imread('Placa2.jpg');
 figure, imshow(img);
 tic;
 img = preprocessing(img);
@@ -13,13 +13,12 @@ areabig = h*w;
 plate = '';
 
 for i = 1 : length(st);
+       
       thisBB = st(i).BoundingBox;
       
       potentialPlate = imcrop(img, thisBB); %Is one candidate to be a plate
       charBounds = segment_characters(potentialPlate);  
       
-      
-      rectangle('Position', [thisBB(1),thisBB(2),thisBB(3),thisBB(4)],'EdgeColor','g','LineWidth',2 )
       if length(charBounds) < 4; continue; end
       
       
@@ -27,7 +26,7 @@ for i = 1 : length(st);
       height = thisBB(3);
       area = (width*height);
       ratio = area/areabig;
-      %if abs(ratio-1) < 0.1 && length(st) > 1; continue; end %Evita evualuar toda la imagen
+      if abs(ratio-1) < 0.1 && length(st) > 1; continue; end %Evita evualuar toda la imagen
       % se supone que siemrpe esta el rectangulo de la placa recubriendo...
             
       plate = '';
@@ -35,7 +34,6 @@ for i = 1 : length(st);
       figure, imshow(potentialPlate);
       
       c = 0;
-      disp('')
       for k = 1 : length(charBounds);
             
           charBB = charBounds(k).BoundingBox;
@@ -49,19 +47,19 @@ for i = 1 : length(st);
           c = c + 1;
           rectangle('Position', [charBB(1),charBB(2),charBB(3),charBB(4)],'EdgeColor','r','LineWidth',2 )
           
-          disp(strcat('pos : ',num2str(charBB(1))))
-          flag = '';
-          val = '';
+          %disp(strcat('pos : ',num2str(charBB(1))))
+          
          if ( c>3 );
               [flag,val] = recognize(char,horzcat('0':'9'));
           else
               [flag,val] = recognize(char,horzcat('A':'Z'));
           end
-          disp(strcat('value : ',flag))
           
           
+          
+          disp(strcat('val : ', num2str(val)))
           if val >= 0.5; 
-              disp(plate)
+              
               plate = strcat(plate,flag);
               if '0' <= flag && flag <= '9';
                   numbers = numbers + 1;
