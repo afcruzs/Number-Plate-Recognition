@@ -32,6 +32,6 @@ function [character,val] = recognize(binaryImage,alphabet)
     end
     character = letter;
     val = maxm;
-    figure, imshow(imgMax);
+    %figure, imshow(imgMax);
     %disp(strcat('recognize ',letter))
 end

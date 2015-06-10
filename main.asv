@@ -1,9 +1,14 @@
-function [l1,l2,l3,n1,n2,n3 , y] = main(name)
+function y = main(name)
 
-img = imread(name);
+%img = imread('Placa19.jpg');
+
+tic;
+img = imread()
 img = preprocessing(img);
+y = img
 
 st = regionprops(img, 'BoundingBox' );
+
 sz = size(img);
 h = sz(1);
 w = sz(2);
@@ -17,7 +22,7 @@ for i = 1 : length(st);
       charBounds = segment_characters(potentialPlate);  
       
       
-      %rectangle('Position', [thisBB(1),thisBB(2),thisBB(3),thisBB(4)],'EdgeColor','g','LineWidth',2 )
+      rectangle('Position', [thisBB(1),thisBB(2),thisBB(3),thisBB(4)],'EdgeColor','g','LineWidth',2 )
       if length(charBounds) < 4; continue; end
       
       
@@ -33,12 +38,11 @@ for i = 1 : length(st);
       %figure, imshow(potentialPlate);
       
       c = 1;
-     
       for k = 1 : length(charBounds);
             
           charBB = charBounds(k).BoundingBox;
-          %rectangle('Position', [charBB(1),charBB(2),charBB(3),charBB(4)],'EdgeColor','b','LineWidth',2 )
-          imageTemp = imcrop(potentialPlate,charBB);
+          rectangle('Position', [charBB(1),charBB(2),charBB(3),charBB(4)],'EdgeColor','b','LineWidth',2 )
+          char = imcrop(potentialPlate,charBB);
           h2 = charBB(3); w2 = charBB(4);
           ratio = (h2*w2)/(area);
           delta = abs(ratio-0.08);
@@ -50,38 +54,26 @@ for i = 1 : length(st);
           
           %disp(strcat('pos : ',num2str(charBB(1))))
          if ( c>3 && c<=6);
-              [flag,val] = recognize(imageTemp,'0':'9');
+              [flag,val] = recognize(char,'0':'9');
+              disp('number')
          else
-              [flag,val] = recognize(imageTemp,'A':'Z');
+              [flag,val] = recognize(char,'A':'Z');
          end
           %[flag,val] = recognize(char,horzcat('0':'9','A':'Z'));
           %[flag,val] = recognize(char,horzcat('A':'Z', '0':'9'));
           %disp(strcat('val : ',num2str(val)))
           %figure, imshow(char)
-          if val >= 0.5;
-              
+          if val >= 0.5;                
+              c = c + 1
               plate = strcat(plate,flag);
               if '0' <= flag && flag <= '9';
                   numbers = numbers + 1;
               end
-              if(c == 1);
-                  l1 = imageTemp;
-              elseif(c==2);
-                  l2 = imageTemp;
-              elseif(c==3);
-                  l3 = imageTemp;
-              elseif(c==4);
-                  n1 = imageTemp;
-              elseif(c==5);
-                  n2 = imageTemp;
-              elseif(c==6);
-                  n3 = imageTemp;
-              end
-              c = c + 1
               
           end
       end
     
+      disp(arr);
       if length(plate) == 6 && numbers == 3; 
           break;
       end
@@ -93,7 +85,5 @@ if length(plate) ~= 6;
 else
     disp(strcat('La puta placa es: ',plate));
 end
-
-y = img;
 end
 
