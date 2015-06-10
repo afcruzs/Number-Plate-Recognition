@@ -1,4 +1,4 @@
-img = imread('Placa18.jpg');
+img = imread('Placa1.jpg');
 figure, imshow(img);
 tic;
 img = preprocessing(img);
@@ -32,10 +32,9 @@ for i = 1 : length(st);
             
       plate = '';
       numbers = 0;
-      figure, imshow(potentialPlate);
+      %figure, imshow(potentialPlate);
       
-      c = 0;
-      disp('')
+      c = 1;
       for k = 1 : length(charBounds);
             
           charBB = charBounds(k).BoundingBox;
@@ -44,24 +43,25 @@ for i = 1 : length(st);
           h2 = charBB(3); w2 = charBB(4);
           ratio = (h2*w2)/(area);
           delta = abs(ratio-0.08);
+          
           if delta > 0.06;  continue;end;%Descarta las cosas pequenas que estorban
-          if (w2 < h2); continue; end;
-          c = c + 1;
-          rectangle('Position', [charBB(1),charBB(2),charBB(3),charBB(4)],'EdgeColor','r','LineWidth',2 )
+          if (w2 < h2 || w2/3 > h2 ); continue; end;
           
-          disp(strcat('pos : ',num2str(charBB(1))))
-          flag = '';
-          val = '';
-         if ( c>3 );
-              [flag,val] = recognize(char,horzcat('0':'9'));
-          else
-              [flag,val] = recognize(char,horzcat('A':'Z'));
-          end
-          disp(strcat('value : ',flag))
+          %rectangle('Position', [charBB(1),charBB(2),charBB(3),charBB(4)],'EdgeColor','r','LineWidth',2 )
           
-          
-          if val >= 0.5; 
-              disp(plate)
+          %disp(strcat('pos : ',num2str(charBB(1))))
+         if ( c>3 && c<=6);
+              [flag,val] = recognize(char,'0':'9');
+              disp('number')
+         else
+              [flag,val] = recognize(char,'A':'Z');
+         end
+          %[flag,val] = recognize(char,horzcat('0':'9','A':'Z'));
+          %[flag,val] = recognize(char,horzcat('A':'Z', '0':'9'));
+          %disp(strcat('val : ',num2str(val)))
+          %figure, imshow(char)
+          if val >= 0.5;                
+              c = c + 1
               plate = strcat(plate,flag);
               if '0' <= flag && flag <= '9';
                   numbers = numbers + 1;
@@ -70,7 +70,7 @@ for i = 1 : length(st);
           end
       end
     
-      disp(plate);
+      disp(arr);
       if length(plate) == 6 && numbers == 3; 
           break;
       end

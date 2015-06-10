@@ -1,5 +1,5 @@
 function ret = fix_ilumination(I)
-    background = imopen(I,strel('disk',80)); 
+    background = imopen(I,strel('disk',70)); 
     I2 = I - background;
     I3 = imadjust(I2);
     level = graythresh(I3);
