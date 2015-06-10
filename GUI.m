@@ -77,32 +77,23 @@ varargout{1} = handles.output;
 function buttonFind_Callback(hObject, eventdata, handles)
     [FileName,PathName,FilterIndex] = uigetfile('*.jpg','Select the MATLAB code file')
     axes(handles.axes1);
-    imshow(imread(FileName));
+    imshow(imread(FileName));  
+    main(FileName, handles);
     
-    [l1,l2,l3,n1,n2,n3, img] = main(FileName);
-    
-    axes(handles.axes8);
-    imshow(img);
-    axes(handles.axes2);
-    imshow(l1);
-    axes(handles.axes3);
-    imshow(l2);
-    axes(handles.axes4);
-    imshow(l3);
-    axes(handles.axes5);
-    imshow(n1);
-    axes(handles.axes6);
-    imshow(n2);
-    axes(handles.axes7);
-    imshow(n3);
-    
-
-    
-    
-    
-    
-    
-    
+%     axes(handles.axes8);
+%     imshow(img);
+%     axes(handles.axes2);
+%     imshow(l1);
+%     axes(handles.axes3);
+%     imshow(l2);
+%     axes(handles.axes4);
+%     imshow(l3);
+%     axes(handles.axes5);
+%     imshow(n1);
+%     axes(handles.axes6);
+%     imshow(n2);
+%     axes(handles.axes7);
+%     imshow(n3);   
 % hObject    handle to buttonFind (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)

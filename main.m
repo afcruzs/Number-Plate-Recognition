@@ -1,7 +1,10 @@
-function [l1,l2,l3,n1,n2,n3 , y] = main(name)
+function [y] = main(name, handles)
 
 img = imread(name);
 img = preprocessing(img);
+
+axes(handles.axes8);
+imshow(img);
 
 st = regionprops(img, 'BoundingBox' );
 sz = size(img);
@@ -57,27 +60,40 @@ for i = 1 : length(st);
           %[flag,val] = recognize(char,horzcat('0':'9','A':'Z'));
           %[flag,val] = recognize(char,horzcat('A':'Z', '0':'9'));
           %disp(strcat('val : ',num2str(val)))
-          %figure, imshow(char)
+          
           if val >= 0.5;
-              
+              %figure, imshow(char)
               plate = strcat(plate,flag);
               if '0' <= flag && flag <= '9';
                   numbers = numbers + 1;
               end
+              
               if(c == 1);
                   l1 = imageTemp;
+                  axes(handles.axes2);
+                  imshow(l1);                
               elseif(c==2);
                   l2 = imageTemp;
+                  axes(handles.axes3);
+                  imshow(l2); 
               elseif(c==3);
                   l3 = imageTemp;
+                  axes(handles.axes4);
+                  imshow(l3); 
               elseif(c==4);
                   n1 = imageTemp;
+                  axes(handles.axes5);
+                  imshow(n1); 
               elseif(c==5);
                   n2 = imageTemp;
+                  axes(handles.axes6);
+                  imshow(n2); 
               elseif(c==6);
                   n3 = imageTemp;
+                  axes(handles.axes7);
+                  imshow(n3); 
               end
-              c = c + 1
+              c = c + 1;
               
           end
       end
