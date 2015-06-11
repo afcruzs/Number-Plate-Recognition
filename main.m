@@ -71,27 +71,33 @@ for i = 1 : length(st);
               if(c == 1);
                   l1 = imageTemp;
                   axes(handles.axes2);
-                  imshow(l1);                
+                  imshow(l1);
+                  set(handles.l1,'String',flag);
               elseif(c==2);
                   l2 = imageTemp;
                   axes(handles.axes3);
                   imshow(l2); 
+                  set(handles.l2,'String',flag);
               elseif(c==3);
                   l3 = imageTemp;
                   axes(handles.axes4);
                   imshow(l3); 
+                  set(handles.l3,'String',flag);
               elseif(c==4);
                   n1 = imageTemp;
                   axes(handles.axes5);
                   imshow(n1); 
+                  set(handles.n1,'String',flag);
               elseif(c==5);
                   n2 = imageTemp;
                   axes(handles.axes6);
                   imshow(n2); 
+                  set(handles.n2,'String',flag);
               elseif(c==6);
                   n3 = imageTemp;
                   axes(handles.axes7);
                   imshow(n3); 
+                  set(handles.n3,'String',flag);
               end
               c = c + 1;
               
@@ -103,11 +109,12 @@ for i = 1 : length(st);
       end
 end
 
-toc
+%toc
 if length(plate) ~= 6;
     disp('No es una placa valida j3j3j3j3j3');
 else
     disp(strcat('La puta placa es: ',plate));
+    set(handles,'String',plate);
 end
 
 y = img;
