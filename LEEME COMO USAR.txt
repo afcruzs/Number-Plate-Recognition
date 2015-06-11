@@ -1,0 +1,7 @@
+Para ejecutar el programa se debe correr en MATLAB el archivo GUI.m, alli se abrira la interfaz grafica y se debe 
+seleccionar buscar imagen para abrir la imagen e iniciar el reconocimiento. Si se desea consultar otra placa
+se debe esperar a que el software comunique si la placa fue valida o no.
+
+Este software fue desarrollado en Matlab 2013b por Andres Felipe Cruz t Fabian Andres Rodriguez.
+
+Universidad Nacional de Colombia 2015

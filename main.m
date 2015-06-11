@@ -105,9 +105,10 @@ for i = 1 : length(st);
 end
 
 if length(plate) ~= 6;
-    disp('No es una placa valida');
+    %disp('No es una placa valida');
+    h = msgbox('no es una placa valida');
 else
-    disp(strcat('La puta placa es: ',plate));
+    h = msgbox(strcat('Es una placa valida!',plate));
 end
 
 y = img;
