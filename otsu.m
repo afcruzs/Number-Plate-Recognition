@@ -1,5 +1,4 @@
 function img = otsu(imgname)
-    %I = fix_ilumination(rgb2gray(imread(imgname))); %Se lee la imagen en escala de grises
     I = imgname;
     dim = size(I);
     height = dim(1); width = dim(2);

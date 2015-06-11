@@ -51,19 +51,13 @@ for i = 1 : length(st);
           if (w2 < h2 || w2/3 > h2 ); continue; end;
           axes(handles.axes8);
           rectangle('Position', [charBB(1),charBB(2),charBB(3),charBB(4)],'EdgeColor','r','LineWidth',2 )
-          
-          %disp(strcat('pos : ',num2str(charBB(1))))
          if ( c>3 && c<=6);
               [flag,val] = recognize(imageTemp,'0':'9');
          else
               [flag,val] = recognize(imageTemp,'A':'Z');
          end
-          %[flag,val] = recognize(char,horzcat('0':'9','A':'Z'));
-          %[flag,val] = recognize(char,horzcat('A':'Z', '0':'9'));
-          %disp(strcat('val : ',num2str(val)))
           
           if val >= 0.5;
-              %figure, imshow(char)
               plate = strcat(plate,flag);
               if '0' <= flag && flag <= '9';
                   numbers = numbers + 1;
@@ -110,12 +104,10 @@ for i = 1 : length(st);
       end
 end
 
-%toc
 if length(plate) ~= 6;
-    disp('No es una placa valida j3j3j3j3j3');
+    disp('No es una placa valida');
 else
     disp(strcat('La puta placa es: ',plate));
-    %set(handles,'String',plate);
 end
 
 y = img;
