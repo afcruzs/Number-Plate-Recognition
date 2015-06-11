@@ -78,6 +78,7 @@ function buttonFind_Callback(hObject, eventdata, handles)
     [FileName,PathName,FilterIndex] = uigetfile('*.jpg','Select the MATLAB code file')
     axes(handles.axes1);
     imshow(imread(FileName));  
+    set(handles.fileNamexd,'String',FileName);
     main(FileName, handles);
     
 %     axes(handles.axes8);

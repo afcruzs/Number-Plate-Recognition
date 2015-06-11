@@ -3,7 +3,8 @@ function [y] = main(name, handles)
 img = imread(name);
 img = preprocessing(img);
 
-
+axes(handles.axes8);
+imshow(img);
 
 st = regionprops(img, 'BoundingBox' );
 sz = size(img);
@@ -35,13 +36,11 @@ for i = 1 : length(st);
       %figure, imshow(potentialPlate);
       
       c = 1;
-     axes(handles.axes8);
-     imshow(potentialPlate);
+     
       for k = 1 : length(charBounds);
             
           charBB = charBounds(k).BoundingBox;
           %rectangle('Position', [charBB(1),charBB(2),charBB(3),charBB(4)],'EdgeColor','b','LineWidth',2 )
-          
           imageTemp = imcrop(potentialPlate,charBB);
           h2 = charBB(3); w2 = charBB(4);
           ratio = (h2*w2)/(area);
@@ -49,7 +48,7 @@ for i = 1 : length(st);
           
           if delta > 0.06;  continue;end;%Descarta las cosas pequenas que estorban
           if (w2 < h2 || w2/3 > h2 ); continue; end;
-          axes(handles.axes8);
+          axes(handles.axes1
           rectangle('Position', [charBB(1),charBB(2),charBB(3),charBB(4)],'EdgeColor','r','LineWidth',2 )
           
           %disp(strcat('pos : ',num2str(charBB(1))))
